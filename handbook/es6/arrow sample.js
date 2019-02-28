@@ -1,4 +1,4 @@
-const fibonacci = [1,2,3,5,8]
+const fibonacci = [1, 2, 3, 5, 8]
 console.log(fibonacci
-    .reduce((sum, value) => sum + value)
+  .reduce((sum, value) => sum + value)
 ) // 19
