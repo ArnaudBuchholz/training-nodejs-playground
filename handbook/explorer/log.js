@@ -1,5 +1,5 @@
 const server = require('./server')
 
-server.run((path, response) => {
-  response.end(path)
+server.run((requestedPath, response) => {
+  response.end(requestedPath)
 })
