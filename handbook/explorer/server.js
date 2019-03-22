@@ -9,6 +9,7 @@ module.exports = {
       try {
         callback(request.url.split('/?')[1], response)
       } catch (e) {
+        console.error(e.stack)
         response.statusCode = 500
         response.setHeader('Content-Type', 'text/plain')
         response.end(e.stack)
