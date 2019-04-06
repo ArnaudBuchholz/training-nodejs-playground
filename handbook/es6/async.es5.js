@@ -8,9 +8,7 @@ function asyncCall () {
   console.log('calling')
   return getResultAfter1second().then(function (result) {
     console.log(result) // resolved
-  }).then(function () {
-    return 'done'
-  })
+  }).then(function () { return 'done' })
 }
 
 asyncCall().then(function (message) { console.log(message) })
