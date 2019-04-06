@@ -1,16 +1,16 @@
 function getResultAfter1second () {
-  return new Promise(resolve => {
-    setTimeout(() => {
-      resolve('resolved')
-    }, 1000)
+  return new Promise(function (resolve) {
+    setTimeout(function () { resolve('resolved') }, 1000)
   })
 }
 
 function asyncCall () {
   console.log('calling')
-  getResultAfter1second().then(function (result) {
+  return getResultAfter1second().then(function (result) {
     console.log(result) // resolved
+  }).then(function () {
+    return 'done'
   })
 }
 
-asyncCall()
+asyncCall().then(function (message) {console.log(message)})
