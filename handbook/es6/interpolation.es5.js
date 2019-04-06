@@ -1,3 +1,3 @@
 var firstName = 'Arnaud'
-console.log('Hello ' + firstName
-  + '\nToday is ' + new Date())
+console.log('Hello ' + firstName +
+  '\nToday is ' + new Date())
