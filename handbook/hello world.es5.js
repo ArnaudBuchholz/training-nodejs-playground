@@ -9,5 +9,5 @@ const server = http.createServer(function (request, response) {
 })
 // Callback is triggered when server is ready
 server.listen(port, hostname, function () {
-  console.log("Server running at http://" + hostname + ":" + port + "/")
+  console.log('Server running at http://' + hostname + ':' + port + '/')
 })
