@@ -13,4 +13,4 @@ function asyncCall () {
   })
 }
 
-asyncCall().then(function (message) {console.log(message)})
+asyncCall().then(function (message) { console.log(message) })
