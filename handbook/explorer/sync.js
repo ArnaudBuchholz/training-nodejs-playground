@@ -9,8 +9,8 @@ server.run((folderPath, output, end) => {
       const stat = fs.statSync(subPath)
       output(subPath, stat)
     } catch (e) {
-      output(subPath, {error: e})
+      output(subPath, { error: e })
     }
   })
-  end();
+  end()
 })
