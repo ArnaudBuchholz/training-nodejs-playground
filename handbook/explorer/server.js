@@ -35,7 +35,7 @@ module.exports = {
       } catch (e) {
         console.error(e.stack)
         response.write(`<tr><td colspan="2"><pre style="color: red;">${e.stack}</pre></td></tr>`)
-        end();
+        end()
       }
     })
     server.listen(port, hostname, () => {
