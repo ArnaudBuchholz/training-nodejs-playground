@@ -20,20 +20,22 @@ module.exports = {
   run: callback => {
     const server = http.createServer((request, response) => {
       const now = new Date()
+      function end () {
+        response.end('</table></body></html>')
+        console.log(`${request.url}: ${new Date() - now}ms`)
+      }
       try {
         response.statusCode = 200
         response.setHeader('Content-Type', 'text/html')
         const requestedPath = request.url.split('/?')[1]
         if (requestedPath) {
           response.write(`<html><link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon"><body><h1>${requestedPath}</h1><table border="0">`)
-          callback(requestedPath, (filePath, fileStat) => writeInfo(response, filePath, fileStat))
+          callback(requestedPath, (filePath, fileStat) => writeInfo(response, filePath, fileStat), end)
         }
       } catch (e) {
         console.error(e.stack)
         response.write(`<tr><td colspan="2"><pre style="color: red;">${e.stack}</pre></td></tr>`)
-      } finally {
-        response.end('</table></body></html>')
-        console.log(`${request.url}: ${new Date() - now}ms`)
+        end();
       }
     })
     server.listen(port, hostname, () => {
