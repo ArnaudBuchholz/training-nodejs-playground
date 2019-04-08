@@ -13,7 +13,7 @@ server.run((requestedPath, output, end) => {
       const subPath = path.join(requestedPath, name)
       fs.stat(subPath, (err, subStat) => {
         if (err) {
-          output(subPath, {error: err})
+          output(subPath, { error: err })
         } else {
           output(subPath, subStat)
         }
