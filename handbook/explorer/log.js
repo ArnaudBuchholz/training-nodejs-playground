@@ -1,5 +1,8 @@
 const server = require('./server')
 
-server.run((requestedPath, response) => {
-  response.end(requestedPath)
+server.run((filePath, output) => {
+  output(filePath, {
+      isDirectory: () => false,
+      size: 1
+  })
 })
