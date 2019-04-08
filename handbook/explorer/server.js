@@ -8,7 +8,7 @@ function writeInfo (response, filePath, fileStat) {
   if (fileStat.error) {
     response.write(`<tr><td>${name}</td><td><pre style="color: red;">${fileStat.error}</pre>`)
   } else if (fileStat.isDirectory()) {
-    response.write(`<tr><td colspan="2"><a href=/?${filePath}>${name}\</a></td>`)
+    response.write(`<tr><td colspan="2"><a href=/?${filePath}>${name}\\</a></td>`)
   } else {
     response.write(`<tr><td>${name}</td><td>${fileStat.size.toString()}`)
   }
