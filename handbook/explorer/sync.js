@@ -2,7 +2,7 @@ const server = require('./server')
 const fs = require('fs')
 const path = require('path')
 
-server.run((folderPath, output) => {
+server.run((folderPath, output, end) => {
   fs.readdirSync(folderPath).forEach(name => {
     const subPath = path.join(folderPath, name)
     try {
@@ -12,4 +12,5 @@ server.run((folderPath, output) => {
       output(subPath, {error: e})
     }
   })
+  end();
 })
