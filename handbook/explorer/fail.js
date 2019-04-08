@@ -1,5 +1,5 @@
 const server = require('./server')
 
-server.run((requestedPath, response) => {
+server.run(() => {
   throw new Error('FAIL')
 })
