@@ -23,7 +23,12 @@ module.exports = {
   run: callback => {
     const server = http.createServer((request, response) => {
       const now = new Date()
+      const timeoutId = setTimeout(() => {
+          response.write(`<tr><td colspan="2"><pre style="color: red;">TIMEOUT</pre></td></tr>`)
+          end()
+      }, 10000)
       function end () {
+        clearTimeout(timeoutId)
         response.end('</table></body></html>')
         console.log(`${request.url}: ${new Date() - now}ms`)
       }
@@ -34,6 +39,7 @@ module.exports = {
         response.write(`<html><link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon"><body>`)
         if (requestedPath) {
           response.write(`<h1>${requestedPath}</h1><table border="0">`)
+
           callback(requestedPath, (filePath, fileStat) => writeInfo(response, filePath, fileStat), end)
         } else {
           response.write(`Missing path parameter: <a href="/?C:\\">Example</a><table border="0">`)
