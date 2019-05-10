@@ -7,5 +7,5 @@ server.run((filePath, output, end) => {
     isDirectory: () => false,
     size: 1
   })
-  end() // call when done
+  end() // conclude the request
 })
