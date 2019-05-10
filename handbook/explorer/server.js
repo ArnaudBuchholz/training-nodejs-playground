@@ -13,6 +13,9 @@ function writeInfo (response, filePath, fileStat) {
     response.write(`<tr><td>${name}</td><td>${fileStat.size.toString()}`)
   }
   response.write(`</td></tr>`)
+  // Add synchronous delay of 20ms per output
+  const now = new Date()
+  while (new Date() - now < 20) {}
 }
 
 module.exports = {
@@ -28,9 +31,13 @@ module.exports = {
         response.statusCode = 200
         response.setHeader('Content-Type', 'text/html')
         const requestedPath = request.url.split('/?')[1]
+        response.write(`<html><link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon"><body>`)
         if (requestedPath) {
-          response.write(`<html><link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon"><body><h1>${requestedPath}</h1><table border="0">`)
+          response.write(`<h1>${requestedPath}</h1><table border="0">`)
           callback(requestedPath, (filePath, fileStat) => writeInfo(response, filePath, fileStat), end)
+        } else {
+          response.write(`Missing path parameter: <a href="/?C:\\">Example</a><table border="0">`)
+          end()
         }
       } catch (e) {
         console.error(e.stack)
