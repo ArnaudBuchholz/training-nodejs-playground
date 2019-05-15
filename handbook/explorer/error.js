@@ -1,7 +1,7 @@
 const server = require('./server')
 
-server.run((filePath, output, end) => {
-  output(filePath, {
+server.run((folderPath, output, end) => {
+  output(folderPath, {
     error: 'This is an error'
   })
   end()
