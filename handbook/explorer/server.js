@@ -9,10 +9,14 @@ function writeInfo (response, filePath, fileStat) {
   response.write(`<tr><td`)
   if (fileStat.error) {
     response.write(`>${name}</td><td><pre style="color: red;">${fileStat.error}</pre>`)
-  } else if (fileStat.isDirectory()) {
-    response.write(` colspan="2"><a href=/?${filePath}>${name}\\</a></td>`)
-  } else {
-    response.write(`>${name}</td><td>${fileStat.size.toString()}`)
+  } else try {
+    if (fileStat.isDirectory()) {
+      response.write(` colspan="2"><a href="/?${filePath}">${name}\\</a></td>`)
+    } else {
+      response.write(`>${name}</td><td>${fileStat.size.toString()}`)
+    }
+  } catch (e) {
+    response.write(`>${name}</td><td><pre style="color: red;">${e.toString()}</pre>`)
   }
   response.write(`</td></tr>`)
   // Add synchronous delay of 20ms per output
@@ -41,7 +45,7 @@ module.exports = {
       try {
         response.statusCode = 200
         response.setHeader('Content-Type', 'text/html')
-        const requestedPath = request.url.split('/?')[1]
+        const requestedPath = unescape(request.url.split('/?')[1] || '')
         // Begin of HTML page
         response.write(`<html><link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon"><body>`)
         if (requestedPath) {
