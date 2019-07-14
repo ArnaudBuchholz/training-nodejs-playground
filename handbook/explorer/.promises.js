@@ -1,29 +1,26 @@
 const server = require('./server')
 const fs = require('fs')
 const path = require('path')
+const util = require('util')
 
-server.run((requestedPath, output, end) => {
-  fs.readdir(requestedPath, (err, names) => {
-    if (err) {
-      output('', err)
-      return end()
+const readdirAsync = util.promisify(fs.readdir)
+const statAsync = util.promisify(fs.stat)
+
+server.run(async (requestedPath, output, end) => {
+  let names
+  try {
+    names = await readdirAsync(requestedPath)
+  } catch (e) {
+    output('', { error: e })
+    return end()
+  }
+  for (var index = 0; index < names.length; ++index) {
+    const subPath = path.join(requestedPath, names[index])
+    try {
+      output(subPath, await statAsync(subPath))
+    } catch (e) {
+      output(subPath, { error: e })
     }
-    Promise.all(names.map(name => new Promise(resolve => {
-      const subPath = path.join(requestedPath, name)
-      fs.stat(subPath, (err, subStat) => {
-        if (err) {
-          resolve({
-            subPath,
-            subStat: {
-              error: err
-            }
-          })
-        } else {
-          resolve({ subPath, subStat })
-        }
-      })
-    }))).then(results => results.forEach(result => {
-      output(result.subPath, result.subStat)
-    })).then(end)
-  })
+  }
+  end()
 })
