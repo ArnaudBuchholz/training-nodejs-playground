@@ -4,6 +4,7 @@
   "description": "Node.js scripts",
   "main": "index.js",
   "scripts": {
+    "start": "reserve",
     "test": "standard --fix"
   },
   "repository": {
@@ -17,6 +18,8 @@
   },
   "homepage": "https://github.com/ArnaudBuchholz/training-nodejs-playground#readme",
   "devDependencies": {
-    "standard": "^12.0.1"
+    "lodash": ">=4.17.13",
+    "reserve": "^1.0.5",
+    "standard": "^13.1.0"
   }
 }
