@@ -1,3 +1,1 @@
-const server = require('./server')
-
-server.run(() => {})
+module.exports = () => {}
