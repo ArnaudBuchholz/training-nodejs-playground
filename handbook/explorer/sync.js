@@ -3,7 +3,7 @@
 const fs = require('fs')
 const path = require('path')
 
-function sync (folderPath, output, end) {
+module.exports = function sync (folderPath, output, end) {
   fs.readdirSync(folderPath).forEach(name => {
     const subPath = path.join(folderPath, name)
     try {
@@ -15,5 +15,3 @@ function sync (folderPath, output, end) {
   })
   end()
 }
-
-module.exports = require('./custom')(sync)
