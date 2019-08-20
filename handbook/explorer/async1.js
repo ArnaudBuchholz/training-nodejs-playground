@@ -1,8 +1,9 @@
-const server = require('./server')
+'use strict'
+
 const fs = require('fs')
 const path = require('path')
 
-server.run((requestedPath, output, end) => {
+module.exports = (requestedPath, output, end) => {
   fs.readdir(requestedPath, (err, names) => {
     if (err) {
       output('', err)
@@ -23,4 +24,4 @@ server.run((requestedPath, output, end) => {
       })
     })
   })
-})
+}
