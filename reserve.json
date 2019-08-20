@@ -1,7 +1,7 @@
 {
   "port": 3000,
   "mappings": [{
-    "match": "^/handbook/explorer/api\\?type=([a-z]+)&path=(.*)",
+    "match": "^/handbook/explorer/api/([a-z0-9]+)\\?([^?]*)(?:\\?([0-9]+))?",
     "custom": "./handbook/explorer/api.js"
   }, {
     "match": "^/gpf.js",
