@@ -3,12 +3,12 @@
 const fs = require('fs')
 const path = require('path')
 
-module.exports = function sync (folderPath, output, end) {
+module.exports = function (folderPath, output, end) {
   fs.readdirSync(folderPath).forEach(name => {
     const subPath = path.join(folderPath, name)
     try {
       const stat = fs.statSync(subPath)
-      output(subPath, stat)
+      output(name, stat)
     } catch (e) {
       output(subPath, { error: e })
     }
