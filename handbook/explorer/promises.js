@@ -1,4 +1,3 @@
-const server = require('./server')
 const fs = require('fs')
 const path = require('path')
 const util = require('util')
@@ -6,7 +5,7 @@ const util = require('util')
 const readdirAsync = util.promisify(fs.readdir)
 const statAsync = util.promisify(fs.stat)
 
-server.run(async (requestedPath, output, end) => {
+module.exports = async (requestedPath, output, end) => {
   let names
   try {
     names = await readdirAsync(requestedPath)
@@ -23,4 +22,4 @@ server.run(async (requestedPath, output, end) => {
     }
   }
   end()
-})
+}
