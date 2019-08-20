@@ -1,8 +1,8 @@
 {
   "port": 3000,
   "mappings": [{
-    "match": "^/handbook/explorer/sync",
-    "custom": "./handbook/explorer/sync.js"
+    "match": "^/handbook/explorer/api\\?type=([a-z]+)&path=(.*)",
+    "custom": "./handbook/explorer/api.js"
   }, {
     "match": "^/gpf.js",
     "url": "https://cdn.jsdelivr.net/npm/gpf-js@0.2.9/build/gpf.js"
