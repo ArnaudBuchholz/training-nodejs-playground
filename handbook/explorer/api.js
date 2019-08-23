@@ -43,7 +43,7 @@ module.exports = async function (request, response, api, folderPath, delay = 0) 
     setTimeout(() => {
       reject(new Error("timeout"))
     }, 10000)
-    callback(folderPath, (itemPath, itemStat) => {
+    callback(decodeURI(folderPath), (itemPath, itemStat) => {
       if (itemStat.error) {
         write({
           path: itemPath,
