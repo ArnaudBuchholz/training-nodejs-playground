@@ -5,11 +5,77 @@
     <script src="/jquery.js"></script>
     <script src="/bootstrap.js"></script>
     <link rel= "stylesheet" href="/bootstrap.css" />
+    <script>
+
+function onLoad () {
+  gpf.http.get("apis.json")
+    .then(function (response) {
+      return JSON.parse(response.responseText);
+    })
+    .then(function (apis) {
+      var select = document.getElementById("api");
+      apis.forEach(function (api) {
+        var option = document.createElement("option");
+        option.value = api.type;
+        option.innerHTML = api.description;
+        select.appendChild(option);
+      });
+    });
+  gpf.http.get("../../env.json")
+    .then(function (response) {
+      return JSON.parse(response.responseText);
+    })
+    .then(function (env) {
+      var path = document.getElementById("path");
+      if (env.sep === "\\") {
+        path.value = "C:\\windows"
+      } else {
+        path.value = "/bin"
+      }
+    })
+}
+
+function getSelectValue (id) {
+  var select = document.getElementById(id);
+  return select.options[select.selectedIndex].value;
+}
+
+function onExecute () {
+  var
+    api = getSelectValue("api"),
+    path = document.getElementById("path").value,
+    delay = getSelectValue("delay");
+  for (var index = 0; index < 4; ++index) {
+    gpf.http.get("api/" + api + "/" + encodeURI(path) + "?" + delay);
+  }
+}
+
+    </script>
   </head>
-  <body>
+  <body onload="onLoad()">
     <div class="container">
       <div class="jumbotron">
         <h1>Explorer</h1>
+        <form>
+          <div class="form-group">
+            <label>API</label>
+            <select id="api" class="form-control">
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Path</label>
+            <input type="text" id="path" class="form-control" />
+          </div>
+          <div class="form-group">
+            <label>Delay</label>
+            <select id="delay" class="form-control">
+              <option value="0">None</option>
+              <option value="20">20 ms</option>
+              <option value="200">200 ms</option>
+            </select>
+          </div>
+        </form>
+        <button class="btn btn-primary" onclick="onExecute()">Execute</button>
       </div>
     </div>
   </body>
