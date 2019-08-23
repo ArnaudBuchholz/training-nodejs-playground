@@ -1,0 +1,28 @@
+[{
+  "type": "solution",
+  "description": "your solution"
+}, {
+  "type": "error",
+  "description": "error demonstration"
+}, {
+  "type": "exception",
+  "description": "exception demonstration"
+}, {
+  "type": "timeout",
+  "description": "timeout demonstration"
+}, {
+  "type": "folderStatSync",
+  "description": "folder stat example"
+}, {
+  "type": "sync",
+  "description": "using synchronous APIs"
+}, {
+  "type": "async1",
+  "description": "using asynchronous APIs (version 1)"
+}, {
+  "type": "async2",
+  "description": "using asynchronous APIs (version 2)"
+}, {
+  "type": "promises",
+  "description": "using promisified APIs"
+}]
