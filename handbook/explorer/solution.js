@@ -23,6 +23,5 @@
  * @param {api.end} end
  */
 module.exports = (filePath, output, end) => {
-
   end()
 }
