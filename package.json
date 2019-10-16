@@ -19,7 +19,7 @@
   "homepage": "https://github.com/ArnaudBuchholz/training-nodejs-playground#readme",
   "devDependencies": {
     "lodash": ">=4.17.13",
-    "reserve": "^1.0.5",
+    "reserve": "^1.1.1",
     "standard": "^13.1.0"
   }
 }
