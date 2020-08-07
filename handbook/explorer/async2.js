@@ -10,20 +10,20 @@ module.exports = (requestedPath, output, end) => {
       return end()
     }
     function next () {
-        if (0 === names.length) {
-            end()
-            return
+      if (names.length === 0) {
+        end()
+        return
+      }
+      const name = names.shift()
+      const subPath = path.join(requestedPath, name)
+      fs.stat(subPath, (err, subStat) => {
+        if (err) {
+          output(subPath, { error: err })
+        } else {
+          output(subPath, subStat)
         }
-        const name = names.shift()
-        const subPath = path.join(requestedPath, name)
-        fs.stat(subPath, (err, subStat) => {
-          if (err) {
-            output(subPath, { error: err })
-          } else {
-            output(subPath, subStat)
-          }
-          next()
-        })
+        next()
+      })
     }
     next()
   })
