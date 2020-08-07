@@ -29,7 +29,7 @@ module.exports = async function (request, response, api, folderPath, delay = 0) 
   let itemCount = 0
   function write (obj) {
     if (itemCount) {
-      response.write(",")
+      response.write(',')
     }
     response.write(JSON.stringify(obj))
     ++itemCount
@@ -41,7 +41,7 @@ module.exports = async function (request, response, api, folderPath, delay = 0) 
   }
   return new Promise((resolve, reject) => {
     setTimeout(() => {
-      reject(new Error("timeout"))
+      reject(new Error('timeout'))
     }, 10000)
     callback(decodeURI(folderPath), (itemPath, itemStat) => {
       if (itemStat.error) {
@@ -66,6 +66,5 @@ module.exports = async function (request, response, api, folderPath, delay = 0) 
         error: reason.toString()
       })
       response.end(']')
-      resolve()
     })
 }
