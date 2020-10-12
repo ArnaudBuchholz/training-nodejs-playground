@@ -1,6 +1,9 @@
 'use strict'
 
 const { log, serve } = require('reserve')
+const process = require('process')
+
+console.log(`This process is pid ${process.pid}`)
 
 module.exports = () => log(serve({
   port: 8080,
