@@ -17,7 +17,7 @@ module.exports = () => log(serve({
       }, 1000)
     })
   }, {
-    match: '^/load.html',
-    file: 'load.html'
+    match: '^/(.*)',
+    file: '$1'
   }]
 }))
