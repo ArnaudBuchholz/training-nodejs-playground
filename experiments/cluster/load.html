@@ -1,0 +1,41 @@
+<html>
+  <body>
+    <button>run</button>
+    <script>
+
+function getAsync () {
+  return new Promise((resolve, reject) => {
+    const xhr = new XMLHttpRequest()
+    xhr.open('GET', '/')
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === 4) {
+        if (xhr.status === 200) {
+          resolve(xhr.responseText)
+        } else {
+          reject(xhr.statusText)
+        }
+      }
+    }
+    xhr.send()
+  })
+}
+
+document.querySelector('button').addEventListener('click', () => {
+  const COUNT = 100
+  const promises = []
+  console.log(`Submitting ${COUNT} requests...`)
+  const start = new Date()
+  for (let index = 0; index < COUNT; ++index) {
+    promises.push(getAsync())
+  }
+  console.log('Submitted.')
+  Promise.all(promises)
+    .then(() => {
+      const perf = new date() - start
+        console.log(`Finished, took ${perf} ms`)
+    })
+})
+
+    </script>
+  </body>
+</html>
