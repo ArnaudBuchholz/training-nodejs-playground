@@ -20,6 +20,14 @@ module.exports = () => log(serve({
       }, 1000)
     })
   }, {
+    match: '^/kill',
+    custom: () => process.exit(0)
+  }, {
+    match: '^/terminate',
+    custom: () => process.send({
+      cmd: 'terminate'
+    })
+  }, {
     match: '^/(.*)',
     file: '$1'
   }]
