@@ -13,8 +13,14 @@ if (cluster.isMaster) {
   serve()
 }
 
-cluster.on('exit', function (worker) {
-  console.log(`Worker ${worker.id} died`)
-  console.log('Staring a new one...')
-  cluster.fork()
-})
+cluster
+  .on('exit', function (worker) {
+    console.log(`Worker ${worker.id} died`)
+    console.log('Staring a new one...')
+    cluster.fork()
+  })
+  .on('message', function (worker, message) {
+    if (message.cmd === 'terminate') {
+      process.exit(0)
+    }
+  })
